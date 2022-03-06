@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>a-MAZE-ing</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+    }
+
+    canvas {
+      position: fixed;
+      height: min(90vh, 90vw);
+      width: min(90vh, 90vw);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      line-height: 1em;
+      margin: 0;
+      padding-bottom: 0;
+    }
+
+    ul {
+      margin: 5px 0;
+      padding: 0 25px;
+    }
+
+    .help-text {
+      position: fixed;
+      left: 15px;
+      top: 15px;
+      z-index: 10;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="help-text">
+    <h1>
+      Ferris wheele
+    </h1>
+    <ul>
+      <li>Number of seats = <input id="numSeatSlider" value="15" type="range" min="1" max="50" />, Seat index to rotate = <input id="rotateSeatSlider" value="0" type="range" min="0" max="50" /></li>
+      <li>If you click (focus) the seat index slider, you can use the left/right arrow keys to move it by one seat.</li>
+      <li><i>Note: the seat index rotation slider is clamped from [0-numSeats) to prevent out of index rotation.</i></li>
+    </ul>
+  </div>
+
+  <canvas></canvas>
+  <script src="./index.js"></script>
+</body>
+
+</html>

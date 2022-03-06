@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>a-MAZE-ing</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+    }
+
+    canvas {
+      position: fixed;
+      height: min(70vh, 70vw);
+      width: min(70vh, 70vw);
+      top: 50%;
+      left: 50%;
+    }
+
+    h1 {
+      font-size: 1.2rem;
+      line-height: 1em;
+      margin: 0;
+      padding-bottom: 0;
+    }
+
+    ol {
+      margin: 5px 0;
+      padding: 0 25px;
+    }
+
+    .help-text {
+      position: fixed;
+      left: 15px;
+      top: 15px;
+      z-index: 10;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="help-text">
+    <h1>
+      You are the white square (rat)
+    </h1>
+    <ol>
+      <li>Resize: width (N) = <input id="nSlider" value="20" type="number" />, height (M) = <input id="mSlider" value="20" type="number" /></li>
+      <li>Use W, A, S, D, or the arrow keys to move</li>
+      <li>Start on the left. Your goal is to exit the maze on the right.</li>
+    </ol>
+  </div>
+
+  <canvas></canvas>
+  <script src="./index.js"></script>
+</body>
+
+</html>
