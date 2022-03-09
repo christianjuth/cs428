@@ -65,6 +65,13 @@ class Vector3 {
     return this
   }
 
+  subtract(vec3) {
+    this.x -= vec3.x
+    this.y -= vec3.y
+    this.z -= vec3.z
+    return this
+  }
+
   scale(mul) {
     if (mul.constructor === Vector3) {
       this.x *= mul.x
@@ -75,6 +82,24 @@ class Vector3 {
       this.y *= mul
       this.z *= mul
     }
+    return this
+  }
+
+  // Use this when sufficent since its faster than computing
+  // the length (multiplication is much fater than sqrt).
+  lengthSquared() {
+    return this.x ** 2 + this.y ** 2 + this.z ** 2
+  }
+
+  length() {
+    return Math.sqrt(this.lengthSquared())
+  }
+
+  normailze() {
+    const length = this.length()
+    this.x /= length
+    this.y /= length
+    this.z /= length
     return this
   }
 }
@@ -104,7 +129,7 @@ class Scene {
         {
           float zToDivideBy = 1.0 + coordinates.z * 0.5;
           gl_Position = vec4(coordinates, zToDivideBy);
-          vColor = vec4(color, 1.0); 
+          vColor = vec4(color, 1.0);
         }
       `,
       [this.gl.FRAGMENT_SHADER]: `
@@ -436,12 +461,13 @@ class FerrisWheel {
       object.render(scene)
     }
     // connect wheels
+    const shiftSeatVector = this.wheels[0].config.center.clone().scale(0.2)
     for (let i = 0; i < sides; i++) {
       const p1 = this.wheels[0].edgePoints[i]
       const p2 = this.wheels[1].edgePoints[i]
       // update seat positions
-      this.seats[i * 2].config.center = p1
-      this.seats[i * 2 + 1].config.center = p2
+      this.seats[i * 2].config.center = p1.clone().subtract(shiftSeatVector)
+      this.seats[i * 2 + 1].config.center = p2.clone().add(shiftSeatVector)
       scene.addLine(p1, p2, wheelColor)
     }
     // draw stands
